@@ -1,5 +1,7 @@
 package com.datastructures.linkedlist;
 
+import java.util.Stack;
+
 /**
  * Create with by IntelliJ IDEA
  *
@@ -44,12 +46,19 @@ public class SingleLinkedListDemo {
         HeroNode res = findLastIndexNode(singleLinkedList.getHead(), 2);
         System.out.println("res=" + res);
 
-        // 测试一下,第三题,反转单链表
-        System.out.println("原始链表~~~");
+//        // 测试一下,第三题,反转单链表
+//        System.out.println("原始链表~~~");
+//        singleLinkedList.list();
+//        System.out.println("反转单链表后");
+//        reverseList(singleLinkedList.getHead());
+//        singleLinkedList.list();
+
+        // 测试逆序打印单链表
+        System.out.println("测试逆序打印单链表,没有改变链表的结构");
+        System.out.println("先显示一下");
         singleLinkedList.list();
-        System.out.println("反转单链表后");
-        reverseList(singleLinkedList.getHead());
-        singleLinkedList.list();
+        System.out.println("然后打印");
+        reversePrint(singleLinkedList.getHead());
         /*
         // 测试删除节点
         singleLinkedList.deleteNode(1);
@@ -137,6 +146,27 @@ public class SingleLinkedListDemo {
         }
         // 将 head.next 指向 reverseHead.next, 实现单链表的反转
         head.next = reverseHead.next;
+    }
+
+    // 测试题 4
+    // 使用方式 2: 利用栈,将各个节点亚茹到栈中,然后利用栈的先进后出的特点,就实现了逆序打印的效果
+    public static void reversePrint(HeroNode head) {
+        if (head.next == null) {
+            return;
+        }
+        // 创建一个栈,将各个节点压入栈中
+        Stack<HeroNode> stack = new Stack<>();
+        HeroNode cur = head.next;
+        // 将链表的所有节点压入栈中
+        while (cur != null) {
+            stack.push(cur);
+            // cur 后移,这样就可以压入下一个节点
+            cur = cur.next;
+        }
+        // 将栈中的节点进行打印,pop 出栈
+        while (stack.size() > 0) {
+            System.out.println(stack.pop());
+        }
     }
 
 }
